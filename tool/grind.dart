@@ -100,6 +100,8 @@ serveCustomBackend() async {
     var fileContents = file.readAsStringSync();
     fileContents =
         fileContents.replaceAll('https://v1.api.dartpad.dev', serverUrl);
+    fileContents =
+        fileContents.replaceAll('https://nullsafety.api.dartpad.dev', serverUrl);
     file.writeAsStringSync(fileContents);
   }
 
