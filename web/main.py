@@ -15,7 +15,7 @@ if __name__ == '__main__':
 VALID_FILES = [
     'workshops.html',
     'dark_mode.js',
-    'dart-192.png',
+    'flame-192.png',
     'embed-dart.html',
     'embed-flutter.html',
     'embed-html.html',
