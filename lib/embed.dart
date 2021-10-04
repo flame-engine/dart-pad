@@ -84,9 +84,6 @@ class Embed {
   bool _editableTestSolution = false;
   bool _showTestCode = false;
 
-  DElement nullSafetyCheckmark;
-  bool _nullSafetyEnabled = false;
-
   Counter unreadConsoleCounter;
 
   FlashBox testResultBox;
@@ -236,8 +233,6 @@ class Embed {
     showTestCodeCheckmark = DElement(querySelector('#show-test-checkmark'));
     editableTestSolutionCheckmark =
         DElement(querySelector('#editable-test-solution-checkmark'));
-    nullSafetyCheckmark =
-        DElement(querySelector('#toggle-null-safety-checkmark'));
 
     morePopover = DElement(querySelector('#more-popover'));
     menuButton =
@@ -264,10 +259,6 @@ class Embed {
               'hide', !_editableTestSolution);
           testEditor.readOnly =
               solutionEditor.readOnly = !_editableTestSolution;
-          break;
-        case 2:
-          // Null safety
-          nullSafetyEnabled = !nullSafetyEnabled;
           break;
       }
     });
@@ -422,8 +413,7 @@ class Embed {
 
     _initModules()
         .then((_) => _init())
-        .then((_) => _emitReady())
-        .then((_) => _initNullSafety());
+        .then((_) => _emitReady());
   }
 
   /// Initializes a listener for messages from the parent window. Allows this
@@ -518,33 +508,9 @@ class Embed {
   bool get githubParamsPresent =>
       githubOwner.isNotEmpty && githubRepo.isNotEmpty && githubPath.isNotEmpty;
 
-  void _initNullSafety() {
-    if (queryParams.hasNullSafety && queryParams.nullSafety) {
-      nullSafetyEnabled = true;
-    }
-  }
-
-  set nullSafetyEnabled(bool enabled) {
-    _nullSafetyEnabled = enabled;
-    _handleNullSafetySwitched(enabled);
-    featureMessage.text = 'Null safety';
-    featureMessage.toggleAttr('hidden', !enabled);
-    nullSafetyCheckmark.toggleClass('hide', !enabled);
-  }
-
-  bool get nullSafetyEnabled {
-    return _nullSafetyEnabled;
-  }
-
-  void _handleNullSafetySwitched(bool enabled) {
+  void _initApi() {
     var api = deps[DartservicesApi] as DartservicesApi;
-    if (enabled) {
-      api.rootUrl = nullSafetyServerUrl;
-      window.localStorage['null_safety'] = 'true';
-    } else {
-      api.rootUrl = serverUrl;
-      window.localStorage['null_safety'] = 'false';
-    }
+    api.rootUrl = serverUrl;
     _performAnalysis();
   }
 
@@ -558,6 +524,7 @@ class Embed {
   }
 
   void _init() {
+    _initApi();
     deps[GistLoader] = GistLoader.defaultFilters();
     deps[Analytics] = Analytics();
 

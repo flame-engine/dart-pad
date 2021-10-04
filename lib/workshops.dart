@@ -157,7 +157,7 @@ class WorkshopUi {
     deps[Analytics] = Analytics();
 
     // Use null safety for workshops
-    (deps[DartservicesApi] as DartservicesApi).rootUrl = nullSafetyServerUrl;
+    (deps[DartservicesApi] as DartservicesApi).rootUrl = serverUrl;
 
     analysisResultsController = AnalysisResultsController(
         DElement(querySelector('#issues')),
