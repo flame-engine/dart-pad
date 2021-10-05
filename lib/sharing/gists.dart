@@ -49,35 +49,10 @@ String extractHtmlBody(String html) {
   }
 }
 
-Gist createSampleDartGist() {
-  var gist = Gist();
-  // "wispy-dust-1337", "patient-king-8872", "purple-breeze-9817"
-  gist.description = phrases.generate();
-  gist.files.add(GistFile(name: 'main.dart', content: sample.dartCode));
-  gist.files.add(GistFile(
-      name: 'readme.md',
-      content: _createReadmeContents(
-          title: gist.description, withLink: _dartpadLink)));
-  return gist;
-}
-
-Gist createSampleHtmlGist() {
+Gist createSampleFlameGist() {
   var gist = Gist();
   gist.description = phrases.generate();
-  gist.files.add(GistFile(name: 'main.dart', content: sample.dartCodeHtml));
-  gist.files.add(GistFile(name: 'index.html', content: sample.htmlCode));
-  gist.files.add(GistFile(name: 'styles.css', content: sample.cssCode));
-  gist.files.add(GistFile(
-      name: 'readme.md',
-      content: _createReadmeContents(
-          title: gist.description, withLink: _dartpadLink)));
-  return gist;
-}
-
-Gist createSampleFlutterGist() {
-  var gist = Gist();
-  gist.description = phrases.generate();
-  gist.files.add(GistFile(name: 'main.dart', content: sample.flutterCode));
+  gist.files.add(GistFile(name: 'main.dart', content: sample.flameCode));
   gist.files.add(GistFile(
       name: 'readme.md',
       content: _createReadmeContents(

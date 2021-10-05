@@ -589,7 +589,7 @@ class Playground implements GistContainer, GistController {
 
     // If no gist was loaded, use a new Dart gist.
     if (loadResult == LoadGistResult.none) {
-      editableGist.setBackingGist(_createGist(layout));
+      editableGist.setBackingGist(createSampleFlameGist());
 
       // Store the gist so that the same sample is loaded when the page is
       // refreshed.
@@ -612,17 +612,6 @@ class Playground implements GistContainer, GistController {
 
     // Run asynchronously to wait for _context.dartSource to exist
     Timer.run(_performAnalysis);
-  }
-
-  Gist _createGist(Layout layout) {
-    switch (layout) {
-      case Layout.flutter:
-        return createSampleFlutterGist();
-      case Layout.html:
-        return createSampleHtmlGist();
-      default:
-        return createSampleDartGist();
-    }
   }
 
   Future<void> showHome(RouteEnterEvent event) async {
