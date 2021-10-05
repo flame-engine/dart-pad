@@ -116,7 +116,7 @@ void defineTests() {
   group('GistStorage', () {
     test('store', () {
       var storage = GistStorage();
-      storage.setStoredGist(createSampleDartGist());
+      storage.setStoredGist(createSampleFlameGist());
       expect(storage.hasStoredGist, true);
       expect(storage.getStoredGist(), isNotNull);
       expect(storage.storedId, null);
@@ -124,7 +124,7 @@ void defineTests() {
 
     test('clear', () {
       var storage = GistStorage();
-      storage.setStoredGist(createSampleDartGist());
+      storage.setStoredGist(createSampleFlameGist());
       expect(storage.hasStoredGist, true);
       storage.clearStoredGist();
       expect(storage.hasStoredGist, false);

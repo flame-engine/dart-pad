@@ -4,72 +4,19 @@
 
 library dart_pad.sample;
 
-const String dartCode = r'''
-void main() {
-  for (int i = 0; i < 5; i++) {
-    print('hello ${i + 1}');
-  }
-}
-''';
-
-const String dartCodeHtml = r'''
-import 'dart:html';
+final String flameCode = r'''
+import 'package:flame/game.dart';
+import 'package:flutter/material.dart' show runApp;
 
 void main() {
-  final header = querySelector('#header');
-  header?.text = "Hello, World!";
-}
-''';
-
-const String htmlCode = r'''
-<h1 id="header"></h1>
-''';
-
-const String cssCode = r'''
-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 100%;
-  height: 100%;
+    runApp(GameWidget(game: MyGame()));
 }
 
-h1 {
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-}
-''';
-
-final String flutterCode = r'''
-import 'package:flutter/material.dart';
-
-final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: MyWidget(),
-        ),
-      ),
-    );
-  }
-}
-
-class MyWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Text('Hello, World!', style: Theme.of(context).textTheme.headline4);
-  }
+class MyGame extends FlameGame {
+    @override
+    Future<void> onLoad() async {
+        await super.onLoad();
+        // TODO
+    }
 }
 ''';
